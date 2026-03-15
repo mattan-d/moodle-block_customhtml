@@ -17,7 +17,7 @@
 /**
  * Provides support for the conversion of moodle1 backup to the moodle2 format
  *
- * @package    block_html
+ * @package    block_customhtml
  * @copyright  2012 Paul Nicholls
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,9 +25,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Block conversion handler for html
+ * Block conversion handler for customhtml
  */
-class moodle1_block_html_handler extends moodle1_block_handler {
+class moodle1_block_customhtml_handler extends moodle1_block_handler {
     private $fileman = null;
     protected function convert_configdata(array $olddata) {
         global $CFG;
@@ -39,7 +39,7 @@ class moodle1_block_html_handler extends moodle1_block_handler {
         $configdata = unserialize_object($configdata);
 
         // get a fresh new file manager for this instance
-        $this->fileman = $this->converter->get_file_manager($contextid, 'block_html');
+        $this->fileman = $this->converter->get_file_manager($contextid, 'block_customhtml');
 
         // convert course files embedded in the block content
         $this->fileman->filearea = 'content';

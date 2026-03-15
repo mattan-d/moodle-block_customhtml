@@ -19,7 +19,7 @@
  *
  * @copyright 2010 Petr Skoda (http://skodak.org)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package   block_html
+ * @package   block_customhtml
  * @category  files
  * @param stdClass $course course object
  * @param stdClass $birecord_or_cm block instance record
@@ -31,7 +31,7 @@
  * @return bool
  * @todo MDL-36050 improve capability check on stick blocks, so we can check user capability before sending images.
  */
-function block_html_pluginfile($course, $birecord_or_cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
+function block_customhtml_pluginfile($course, $birecord_or_cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
     global $CFG;
 
     require_once("{$CFG->dirroot}/user/lib.php");
@@ -55,7 +55,7 @@ function block_html_pluginfile($course, $birecord_or_cm, $context, $filearea, $a
             }
         } else if ($parentcontext->contextlevel === CONTEXT_USER) {
             $user = core_user::get_user($parentcontext->instanceid, '*', MUST_EXIST);
-            $extracaps = block_method_result('html', 'get_extra_capabilities');
+            $extracaps = block_method_result('customhtml', 'get_extra_capabilities');
             if (!user_can_view_profile($user, null, $parentcontext) || !has_any_capability($extracaps, $context)) {
                 send_file_not_found();
             }
@@ -72,7 +72,7 @@ function block_html_pluginfile($course, $birecord_or_cm, $context, $filearea, $a
     $filename = array_pop($args);
     $filepath = $args ? '/'.implode('/', $args).'/' : '/';
 
-    if (!$file = $fs->get_file($context->id, 'block_html', 'content', 0, $filepath, $filename) or $file->is_directory()) {
+    if (!$file = $fs->get_file($context->id, 'block_customhtml', 'content', 0, $filepath, $filename) or $file->is_directory()) {
         send_file_not_found();
     }
 
@@ -99,10 +99,10 @@ function block_html_pluginfile($course, $birecord_or_cm, $context, $filearea, $a
  * @param  $replace
  * @return void
  */
-function block_html_global_db_replace($search, $replace) {
+function block_customhtml_global_db_replace($search, $replace) {
     global $DB;
 
-    $instances = $DB->get_recordset('block_instances', array('blockname' => 'html'));
+    $instances = $DB->get_recordset('block_instances', array('blockname' => 'customhtml'));
     foreach ($instances as $instance) {
         // TODO: intentionally hardcoded until MDL-26800 is fixed
         $config = unserialize_object(base64_decode($instance->configdata));
@@ -122,7 +122,7 @@ function block_html_global_db_replace($search, $replace) {
  * @param  array  $args The path (the part after the filearea and before the filename).
  * @return array The itemid and the filepath inside the $args path, for the defined filearea.
  */
-function block_html_get_path_from_pluginfile(string $filearea, array $args): array {
+function block_customhtml_get_path_from_pluginfile(string $filearea, array $args): array {
     // This block never has an itemid (the number represents the revision but it's not stored in database).
     array_shift($args);
 

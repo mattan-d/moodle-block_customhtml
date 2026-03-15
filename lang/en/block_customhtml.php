@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'block_html', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'block_customhtml', language 'en', branch 'MOODLE_20_STABLE'
  *
- * @package   block_html
+ * @package   block_customhtml
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['allowadditionalcssclasses'] = 'Allow additional CSS classes';
-$string['configallowadditionalcssclasses'] = 'Adds a configuration option to Text block instances allowing additional CSS classes to be set.';
+$string['configallowadditionalcssclasses'] = 'Adds a configuration option to Custom HTML block instances allowing additional CSS classes to be set.';
 $string['configclasses'] = 'Additional CSS classes';
 $string['configclasses_help'] = 'The purpose of this configuration is to aid with theming by helping distinguish text blocks from each other. Any CSS classes entered here (space delimited) will be appended to the block\'s default classes.';
 $string['configcontent'] = 'Content';
-$string['configtitle'] = 'Text block title';
-$string['html:addinstance'] = 'Add a new text block';
-$string['html:myaddinstance'] = 'Add a new text block to Dashboard';
-$string['newhtmlblock'] = '(new text block)';
-$string['pluginname'] = 'Text';
-$string['search:content'] = 'Text block content';
-$string['privacy:metadata:block'] = 'The Text block stores all of its data within the block subsystem.';
+$string['configtitle'] = 'Custom HTML block title';
+$string['customhtml:addinstance'] = 'Add a new Custom HTML block';
+$string['customhtml:myaddinstance'] = 'Add a new Custom HTML block to Dashboard';
+$string['newhtmlblock'] = '(new Custom HTML block)';
+$string['pluginname'] = 'Custom HTML';
+$string['search:content'] = 'Custom HTML block content';
+$string['privacy:metadata:block'] = 'The Custom HTML block stores all of its data within the block subsystem.';

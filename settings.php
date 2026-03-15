@@ -15,18 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Settings for the HTML block
+ * Settings for the Custom HTML block
  *
  * @copyright 2012 Aaron Barnes
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package   block_html
+ * @package   block_customhtml
  */
 
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-    $settings->add(new admin_setting_configcheckbox('block_html_allowcssclasses', get_string('allowadditionalcssclasses', 'block_html'),
-                       get_string('configallowadditionalcssclasses', 'block_html'), 0));
+    $settings->add(new admin_setting_configcheckbox('block_customhtml_allowcssclasses', get_string('allowadditionalcssclasses', 'block_customhtml'),
+                       get_string('configallowadditionalcssclasses', 'block_customhtml'), 0));
 }
 
 

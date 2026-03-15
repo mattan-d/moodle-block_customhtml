@@ -15,23 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Search area for block_html blocks
+ * Search area for block_customhtml blocks
  *
- * @package block_html
+ * @package block_customhtml
  * @copyright 2017 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace block_html\search;
+namespace block_customhtml\search;
 
 use core_search\moodle_recordset;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Search area for block_html blocks
+ * Search area for block_customhtml blocks
  *
- * @package block_html
+ * @package block_customhtml
  * @copyright 2017 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -83,7 +83,7 @@ class content extends \core_search\base_block {
 
         $context = \context::instance_by_id($document->get('contextid'));
 
-        $files = $fs->get_area_files($context->id, 'block_html', 'content',
+        $files = $fs->get_area_files($context->id, 'block_customhtml', 'content',
                 false, 'itemid, filepath, filename', false);
         foreach ($files as $file) {
             $document->add_stored_file($file);

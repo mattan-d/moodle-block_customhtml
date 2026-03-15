@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Privacy Subsystem implementation for block_html.
+ * Privacy Subsystem implementation for block_customhtml.
  *
- * @package    block_html
+ * @package    block_customhtml
  * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace block_html\privacy;
+namespace block_customhtml\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -35,23 +35,23 @@ use \core_privacy\local\request\deletion_criteria;
 use \core_privacy\local\metadata\collection;
 
 /**
- * Privacy Subsystem implementation for block_html.
+ * Privacy Subsystem implementation for block_customhtml.
  *
  * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
-        // The block_html block stores user provided data.
+        // The block_customhtml block stores user provided data.
         \core_privacy\local\metadata\provider,
 
         // This plugin is capable of determining which users have data within it.
         \core_privacy\local\request\core_userlist_provider,
 
-        // The block_html block provides data directly to core.
+        // The block_customhtml block provides data directly to core.
         \core_privacy\local\request\plugin\provider {
 
     /**
-     * Returns information about how block_html stores its data.
+     * Returns information about how block_customhtml stores its data.
      *
      * @param   collection     $collection The initialised collection to add items to.
      * @return  collection     A listing of user data stored through this system.
@@ -77,7 +77,7 @@ class provider implements
                   FROM {block_instances} b
             INNER JOIN {context} c ON c.instanceid = b.id AND c.contextlevel = :contextblock
             INNER JOIN {context} bpc ON bpc.id = b.parentcontextid
-                 WHERE b.blockname = 'html'
+                 WHERE b.blockname = 'customhtml'
                    AND bpc.contextlevel = :contextuser
                    AND bpc.instanceid = :userid";
 
@@ -109,7 +109,7 @@ class provider implements
         $sql = "SELECT bpc.instanceid AS userid
                   FROM {block_instances} bi
                   JOIN {context} bpc ON bpc.id = bi.parentcontextid
-                 WHERE bi.blockname = 'html'
+                 WHERE bi.blockname = 'customhtml'
                    AND bpc.contextlevel = :contextuser
                    AND bi.id = :blockinstanceid";
 
@@ -138,7 +138,7 @@ class provider implements
                     bi.*
                   FROM {context} c
             INNER JOIN {block_instances} bi ON bi.id = c.instanceid AND c.contextlevel = :contextlevel
-                 WHERE bi.blockname = 'html'
+                 WHERE bi.blockname = 'customhtml'
                    AND(
                     c.id {$contextsql}
                 )
@@ -152,14 +152,14 @@ class provider implements
         $instances = $DB->get_recordset_sql($sql, $params);
         foreach ($instances as $instance) {
             $context = \context_block::instance($instance->id);
-            $block = block_instance('html', $instance);
+            $block = block_instance('customhtml', $instance);
             if (empty($block->config)) {
                 // Skip this block. It has not been configured.
                 continue;
             }
 
             $html = writer::with_context($context)
-                ->rewrite_pluginfile_urls([], 'block_html', 'content', null, $block->config->text);
+                ->rewrite_pluginfile_urls([], 'block_customhtml', 'content', null, $block->config->text);
 
             // Default to FORMAT_HTML which is what will have been used before the
             // editor was properly implemented for the block.
@@ -192,7 +192,7 @@ class provider implements
             return;
         }
 
-        // The only way to delete data for the html block is to delete the block instance itself.
+        // The only way to delete data for the customhtml block is to delete the block instance itself.
         if ($blockinstance = static::get_instance_from_context($context)) {
             blocks_delete_instance($blockinstance);
         }
@@ -217,7 +217,7 @@ class provider implements
      * @param   approved_contextlist    $contextlist    The approved contexts and user information to delete information for.
      */
     public static function delete_data_for_user(approved_contextlist $contextlist) {
-        // The only way to delete data for the html block is to delete the block instance itself.
+        // The only way to delete data for the customhtml block is to delete the block instance itself.
         foreach ($contextlist as $context) {
 
             if (!$context instanceof \context_block) {
@@ -238,6 +238,6 @@ class provider implements
     protected static function get_instance_from_context(\context_block $context) {
         global $DB;
 
-        return $DB->get_record('block_instances', ['id' => $context->instanceid, 'blockname' => 'html']);
+        return $DB->get_record('block_instances', ['id' => $context->instanceid, 'blockname' => 'customhtml']);
     }
 }

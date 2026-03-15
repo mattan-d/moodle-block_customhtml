@@ -15,19 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package   block_html
+ * @package   block_customhtml
  * @subpackage backup-moodle2
  * @copyright 2003 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Specialised restore task for the html block
+ * Specialised restore task for the customhtml block
  * (requires encode_content_links in some configdata attrs)
  *
  * TODO: Finish phpdocs
  */
-class restore_html_block_task extends restore_block_task {
+class restore_customhtml_block_task extends restore_block_task {
 
     protected function define_my_settings() {
     }
@@ -47,7 +47,7 @@ class restore_html_block_task extends restore_block_task {
 
         $contents = array();
 
-        $contents[] = new restore_html_block_decode_content('block_instances', 'configdata', 'block_instance');
+        $contents[] = new restore_customhtml_block_decode_content('block_instances', 'configdata', 'block_instance');
 
         return $contents;
     }
@@ -62,7 +62,7 @@ class restore_html_block_task extends restore_block_task {
  * field, to serve the configdata->text content to the restore_decode_processor
  * packaging it back to its serialized form after process
  */
-class restore_html_block_decode_content extends restore_decode_content {
+class restore_customhtml_block_decode_content extends restore_decode_content {
 
     protected $configdata; // Temp storage for unserialized configdata
 
@@ -76,7 +76,7 @@ class restore_html_block_decode_content extends restore_decode_content {
                   JOIN {backup_ids_temp} b ON b.newitemid = t.id
                  WHERE b.backupid = ?
                    AND b.itemname = ?
-                   AND t.blockname = 'html'";
+                   AND t.blockname = 'customhtml'";
         $params = array($this->restoreid, $this->mapping);
         return ($DB->get_recordset_sql($sql, $params));
     }

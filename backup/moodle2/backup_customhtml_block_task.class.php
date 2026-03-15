@@ -15,19 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    block_html
+ * @package    block_customhtml
  * @subpackage backup-moodle2
  * @copyright  2003 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Specialised backup task for the html block
+ * Specialised backup task for the customhtml block
  * (requires encode_content_links in some configdata attrs)
  *
  * TODO: Finish phpdocs
  */
-class backup_html_block_task extends backup_block_task {
+class backup_customhtml_block_task extends backup_block_task {
 
     protected function define_my_settings() {
     }
@@ -47,4 +47,3 @@ class backup_html_block_task extends backup_block_task {
         return $content; // No special encoding of links
     }
 }
-

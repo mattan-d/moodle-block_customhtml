@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace block_html;
+namespace block_customhtml;
 
 /**
- * Unit test for block_html class.
+ * Unit test for block_customhtml class.
  *
- * @package   block_html
+ * @package   block_customhtml
  * @copyright 2022 Open LMS (https://www.openlms.net/)
  * @author    Petr Skoda
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @coversDefaultClass \block_html
+ * @coversDefaultClass \block_customhtml
  */
-final class block_html_test extends \advanced_testcase {
+final class block_customhtml_test extends \advanced_testcase {
     /**
      * Tests instance files copying.
      * @covers ::instance_copy
@@ -49,14 +49,14 @@ final class block_html_test extends \advanced_testcase {
         $data = (object)['title' => 'Block title', 'text' => ['text' => 'Block text',
             'itemid' => $itemid, 'format' => FORMAT_HTML]];
         $block1->instance_config_save($data);
-        $this->assertTrue($fs->file_exists($block1->context->id, 'block_html', 'content', 0, '/', 'file.txt'));
+        $this->assertTrue($fs->file_exists($block1->context->id, 'block_customhtml', 'content', 0, '/', 'file.txt'));
 
         $block2 = $this->create_block($course);
-        $this->assertFalse($fs->file_exists($block2->context->id, 'block_html', 'content', 0, '/', 'file.txt'));
+        $this->assertFalse($fs->file_exists($block2->context->id, 'block_customhtml', 'content', 0, '/', 'file.txt'));
 
         $this->setUser(null);
         $block2->instance_copy($block1->instance->id);
-        $this->assertTrue($fs->file_exists($block2->context->id, 'block_html', 'content', 0, '/', 'file.txt'));
+        $this->assertTrue($fs->file_exists($block2->context->id, 'block_customhtml', 'content', 0, '/', 'file.txt'));
     }
 
     /**
@@ -80,11 +80,11 @@ final class block_html_test extends \advanced_testcase {
      * Creates an HTML block on a course.
      *
      * @param \stdClass $course Course object
-     * @return \block_html Block instance object
+     * @return \block_customhtml Block instance object
      */
-    protected function create_block($course): \block_html {
+    protected function create_block($course): \block_customhtml {
         $page = self::construct_page($course);
-        $page->blocks->add_block_at_end_of_default_region('html');
+        $page->blocks->add_block_at_end_of_default_region('customhtml');
 
         // Load the block.
         $page = self::construct_page($course);
