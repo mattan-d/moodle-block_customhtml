@@ -15,24 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit tests for the block_html implementation of the privacy API.
+ * Unit tests for the block_customhtml implementation of the privacy API.
  *
- * @package    block_html
+ * @package    block_customhtml
  * @category   test
  * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace block_html\privacy;
+namespace block_customhtml\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
 use core_privacy\local\request\writer;
 use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\approved_userlist;
-use block_html\privacy\provider;
+use block_customhtml\privacy\provider;
 
 /**
- * Unit tests for the block_html implementation of the privacy API.
+ * Unit tests for the block_customhtml implementation of the privacy API.
  *
  * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -72,7 +72,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
 
         $this->create_block($this->construct_user_page($USER));
         $block = $this->get_last_block_on_page($this->construct_user_page($USER));
-        $block = block_instance('html', $block->instance);
+        $block = block_instance('customhtml', $block->instance);
         $block->instance_config_save((object) $configdata);
 
         return $block;
@@ -101,7 +101,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
 
         $this->create_block($this->construct_course_page($course));
         $block = $this->get_last_block_on_page($this->construct_course_page($course));
-        $block = block_instance('html', $block->instance);
+        $block = block_instance('customhtml', $block->instance);
         $block->instance_config_save((object) $configdata);
 
         return $block;
@@ -113,14 +113,14 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
      * @param \page $page Page
      */
     protected function create_block($page) {
-        $page->blocks->add_block_at_end_of_default_region('html');
+        $page->blocks->add_block_at_end_of_default_region('customhtml');
     }
 
     /**
      * Get the last block on the page.
      *
      * @param \page $page Page
-     * @return \block_html Block instance object
+     * @return \block_customhtml Block instance object
      */
     protected function get_last_block_on_page($page) {
         $blocks = $page->blocks->get_blocks_for_region($page->blocks->get_default_region());
@@ -184,7 +184,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
         $this->assertEquals($context, $contextlist->current());
 
         // Export the data.
-        $this->export_context_data_for_user($user->id, $context, 'block_html');
+        $this->export_context_data_for_user($user->id, $context, 'block_customhtml');
         /** @var \core_privacy\tests\request\content_writer $writer */
         $writer = \core_privacy\local\request\writer::with_context($context);
         $this->assertTrue($writer->has_any_data());
@@ -221,7 +221,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
         $block = $this->create_user_block($title, $content, $format);
         $block->instance->configdata = '';
         $DB->update_record('block_instances', $block->instance);
-        $block = block_instance('html', $block->instance);
+        $block = block_instance('customhtml', $block->instance);
 
         $context = \context_block::instance($block->instance->id);
 
@@ -233,7 +233,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
         $this->assertEquals($context, $contextlist->current());
 
         // Export the data.
-        $this->export_context_data_for_user($user->id, $context, 'block_html');
+        $this->export_context_data_for_user($user->id, $context, 'block_customhtml');
         /** @var \core_privacy\tests\request\content_writer $writer */
         $writer = \core_privacy\local\request\writer::with_context($context);
         $this->assertFalse($writer->has_any_data());
@@ -273,7 +273,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
         }
 
         // Turn them into an approved_contextlist.
-        $approvedlist = new approved_contextlist($user, 'block_html', $contextlist->get_contextids());
+        $approvedlist = new approved_contextlist($user, 'block_customhtml', $contextlist->get_contextids());
 
         // Delete using delete_data_for_user.
         provider::delete_data_for_user($approvedlist);
@@ -354,7 +354,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
     public function test_get_users_in_context(): void {
         $this->resetAfterTest();
 
-        $component = 'block_html';
+        $component = 'block_customhtml';
         $title = 'Block title';
         $content = 'Block content';
         $blockformat = FORMAT_PLAIN;
@@ -377,7 +377,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
 
         // Ensure only the user with a user context HTML block is returned.
         $userlist = new \core_privacy\local\request\userlist($usercontext, $component);
-        \block_html\privacy\provider::get_users_in_context($userlist);
+        \block_customhtml\privacy\provider::get_users_in_context($userlist);
 
         $this->assertCount(1, $userlist);
 
@@ -388,7 +388,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
 
         // Ensure passing the course context returns no users.
         $userlist = new \core_privacy\local\request\userlist($coursecontext, $component);
-        \mod_forum\privacy\provider::get_users_in_context($userlist);
+        \block_customhtml\privacy\provider::get_users_in_context($userlist);
         $this->assertEmpty($userlist);
     }
 
@@ -398,7 +398,7 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
     public function test_delete_data_for_users(): void {
         $this->resetAfterTest();
 
-        $component = 'block_html';
+        $component = 'block_customhtml';
         $title = 'Block title';
         $content = 'Block content';
         $blockformat = FORMAT_PLAIN;
@@ -417,27 +417,27 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
 
         // Create and populate the userlists.
         $userlist1 = new \core_privacy\local\request\userlist($context1, $component);
-        \block_html\privacy\provider::get_users_in_context($userlist1);
+        \block_customhtml\privacy\provider::get_users_in_context($userlist1);
         $userlist2 = new \core_privacy\local\request\userlist($context2, $component);
-        \block_html\privacy\provider::get_users_in_context($userlist2);
+        \block_customhtml\privacy\provider::get_users_in_context($userlist2);
 
         // Ensure both members are included.
         $this->assertCount(1, $userlist1);
         $this->assertCount(1, $userlist2);
 
         // Convert $userlist1 into an approved_contextlist.
-        $approvedlist = new approved_userlist($context1, 'block_html', $userlist1->get_userids());
+        $approvedlist = new approved_userlist($context1, 'block_customhtml', $userlist1->get_userids());
 
         // Delete using delete_data_for_user.
         provider::delete_data_for_users($approvedlist);
 
         // Re-fetch users in the contexts - only the first one should now be empty.
         $userlist1 = new \core_privacy\local\request\userlist($context1, $component);
-        \block_html\privacy\provider::get_users_in_context($userlist1);
+        \block_customhtml\privacy\provider::get_users_in_context($userlist1);
         $this->assertCount(0, $userlist1);
 
         $userlist2 = new \core_privacy\local\request\userlist($context2, $component);
-        \block_html\privacy\provider::get_users_in_context($userlist2);
+        \block_customhtml\privacy\provider::get_users_in_context($userlist2);
         $this->assertCount(1, $userlist2);
     }
 }

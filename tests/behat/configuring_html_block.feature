@@ -1,4 +1,4 @@
-@block @block_html @core_block
+@block @block_customhtml @core_block
 Feature: Adding and configuring Text blocks
   In order to have custom blocks on a page
   As admin
@@ -13,11 +13,11 @@ Feature: Adding and configuring Text blocks
       | Text block title |                              |
       | Content          | Static text without a header |
     Then I should not see "(new text block)"
-    And I configure the "block_html" block
+    And I configure the "block_customhtml" block
     And I set the field "Text block title" to "The Text block header"
     And I set the field "Content" to "Static text with a header"
     And I press "Save changes"
-    And "block_html" "block" should exist
+    And "block_customhtml" "block" should exist
     And "The Text block header" "block" should exist
     And I should see "Static text with a header" in the "The Text block header" "block"
 
@@ -30,10 +30,10 @@ Feature: Adding and configuring Text blocks
     And I set the field "Content" to "Static text without a header"
     And I press "Save changes"
     Then I should not see "(new text block)"
-    And I configure the "block_html" block
+    And I configure the "block_customhtml" block
     And I set the field "Text block title" to "The Text block header"
     And I set the field "Content" to "Static text with a header"
     And I press "Save changes"
-    And "block_html" "block" should exist
+    And "block_customhtml" "block" should exist
     And "The Text block header" "block" should exist
     And I should see "Static text with a header" in the "The Text block header" "block"

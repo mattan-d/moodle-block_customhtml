@@ -77,7 +77,7 @@ final class block_customhtml_test extends \advanced_testcase {
     }
 
     /**
-     * Creates an HTML block on a course.
+     * Creates a Custom HTML block on a course.
      *
      * @param \stdClass $course Course object
      * @return \block_customhtml Block instance object

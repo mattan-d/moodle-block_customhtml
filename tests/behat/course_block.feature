@@ -1,4 +1,4 @@
-@block @block_html
+@block @block_customhtml
 Feature: Text blocks in a course
   In order to have one or multiple Text blocks in a course
   As a teacher

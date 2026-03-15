@@ -17,19 +17,19 @@
 /**
  * Unit test for search indexing.
  *
- * @package block_html
+ * @package block_customhtml
  * @copyright 2017 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace block_html;
+namespace block_customhtml;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
  * Unit test for search indexing.
  *
- * @package block_html
+ * @package block_customhtml
  * @copyright 2017 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -39,11 +39,11 @@ final class search_content_test extends \advanced_testcase {
      * Creates an HTML block on a course.
      *
      * @param \stdClass $course Course object
-     * @return \block_html Block instance object
+     * @return \block_customhtml Block instance object
      */
     protected function create_block($course) {
         $page = self::construct_page($course);
-        $page->blocks->add_block_at_end_of_default_region('html');
+        $page->blocks->add_block_at_end_of_default_region('customhtml');
 
         // Load the block.
         $page = self::construct_page($course);
@@ -102,8 +102,8 @@ final class search_content_test extends \advanced_testcase {
         \testable_core_search::instance();
 
         // Do indexing query.
-        $area = new \block_html\search\content();
-        $this->assertEquals('html', $area->get_block_name());
+        $area = new \block_customhtml\search\content();
+        $this->assertEquals('customhtml', $area->get_block_name());
         $rs = $area->get_recordset_by_timestamp();
         $count = 0;
         foreach ($rs as $record) {
