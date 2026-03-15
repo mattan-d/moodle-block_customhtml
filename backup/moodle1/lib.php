@@ -18,7 +18,7 @@
  * Provides support for the conversion of moodle1 backup to the moodle2 format
  *
  * @package    block_customhtml
- * @copyright  2012 Paul Nicholls
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -19,7 +19,7 @@
  *
  * @since Moodle 2.0
  * @package block_customhtml
- * @copyright 2010 Dongsheng Cai
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

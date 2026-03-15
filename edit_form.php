@@ -18,14 +18,14 @@
  * Form for editing HTML block instances.
  *
  * @package   block_customhtml
- * @copyright 2009 Tim Hunt
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * Form for editing Custom HTML block instances.
  *
- * @copyright 2009 Tim Hunt
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_customhtml_edit_form extends block_edit_form {

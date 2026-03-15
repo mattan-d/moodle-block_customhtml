@@ -17,7 +17,7 @@
 /**
  * Form for editing HTML block instances.
  *
- * @copyright 2010 Petr Skoda (http://skodak.org)
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @package   block_customhtml
  * @category  files

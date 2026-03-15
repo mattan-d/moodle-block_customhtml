@@ -18,7 +18,7 @@
  * Strings for component 'block_customhtml', language 'en', branch 'MOODLE_20_STABLE'
  *
  * @package   block_customhtml
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

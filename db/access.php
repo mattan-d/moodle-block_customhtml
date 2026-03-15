@@ -18,7 +18,7 @@
  * HTML block caps.
  *
  * @package    block_customhtml
- * @copyright  Mark Nelson <markn@moodle.com>
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

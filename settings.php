@@ -17,7 +17,7 @@
 /**
  * Settings for the Custom HTML block
  *
- * @copyright 2012 Aaron Barnes
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @package   block_customhtml
  */

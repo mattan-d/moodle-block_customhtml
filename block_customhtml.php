@@ -20,7 +20,7 @@ use core_external\util as external_util;
  * Form for editing Custom HTML block instances.
  *
  * @package   block_customhtml
- * @copyright 1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_customhtml extends block_base {
