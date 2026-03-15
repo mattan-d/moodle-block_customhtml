@@ -48,12 +48,35 @@ class block_customhtml extends block_base {
         return true;
     }
 
+    /**
+     * Whether the current user is allowed to see this block's content (cohort restriction).
+     *
+     * @return bool
+     */
+    protected function user_can_see_content(): bool {
+        global $USER;
+        if (empty($this->config->cohortid)) {
+            return true;
+        }
+        require_once($GLOBALS['CFG']->dirroot . '/cohort/lib.php');
+        return cohort_is_member((int) $this->config->cohortid, $USER->id);
+    }
+
     function get_content() {
-        global $CFG;
+        global $CFG, $USER;
 
         require_once($CFG->libdir . '/filelib.php');
 
         if ($this->content !== NULL) {
+            return $this->content;
+        }
+
+        // If restricted to a cohort and user is not a member, show nothing and hide the block.
+        if (!$this->user_can_see_content()) {
+            $this->content = new stdClass;
+            $this->content->text = '';
+            $this->content->footer = '';
+            $this->title = '';
             return $this->content;
         }
 
@@ -93,6 +116,10 @@ class block_customhtml extends block_base {
         $bc->contenformat = FORMAT_MOODLE;
         $bc->footer = '';
         $bc->files = [];
+
+        if (!$this->user_can_see_content()) {
+            return $bc;
+        }
 
         if (!$this->hide_header()) {
             $bc->title = $this->title;
@@ -136,6 +163,7 @@ class block_customhtml extends block_base {
         // Move embedded files into a proper filearea and adjust HTML links to match
         $config->text = file_save_draft_area_files($data->text['itemid'], $this->context->id, 'block_customhtml', 'content', 0, array('subdirs'=>true), $data->text['text']);
         $config->format = $data->text['format'];
+        $config->cohortid = isset($data->config_cohortid) ? (int) $data->config_cohortid : 0;
 
         parent::instance_config_save($config, $nolongerused);
     }
@@ -204,6 +232,11 @@ class block_customhtml extends block_base {
         global $CFG;
 
         $attributes = parent::html_attributes();
+
+        // Hide the entire block when restricted by cohort and user is not a member.
+        if (!empty($this->config->cohortid) && !$this->user_can_see_content()) {
+            $attributes['class'] .= ' hidden';
+        }
 
         if (!empty($CFG->block_customhtml_allowcssclasses)) {
             if (!empty($this->config->classes)) {

@@ -32,6 +32,8 @@ class block_customhtml_edit_form extends block_edit_form {
     protected function specific_definition($mform) {
         global $CFG;
 
+        require_once($CFG->dirroot . '/cohort/lib.php');
+
         // Fields for editing HTML block title and contents.
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
 
@@ -42,6 +44,19 @@ class block_customhtml_edit_form extends block_edit_form {
         $mform->addElement('editor', 'config_text', get_string('configcontent', 'block_customhtml'), null, $editoroptions);
         $mform->addRule('config_text', null, 'required', null, 'client');
         $mform->setType('config_text', PARAM_RAW); // XSS is prevented when printing the block contents and serving files
+
+        // Restrict visibility to a system cohort.
+        $systemcontext = \context_system::instance();
+        $cohortsresult = cohort_get_cohorts($systemcontext->id, 0, 0, '', false);
+        $cohortoptions = [0 => get_string('configcohortnone', 'block_customhtml')];
+        if (!empty($cohortsresult['cohorts'])) {
+            foreach ($cohortsresult['cohorts'] as $c) {
+                $cohortoptions[$c->id] = format_string($c->name, true, ['context' => $systemcontext]);
+            }
+        }
+        $mform->addElement('select', 'config_cohortid', get_string('configcohort', 'block_customhtml'), $cohortoptions);
+        $mform->setType('config_cohortid', PARAM_INT);
+        $mform->addHelpButton('config_cohortid', 'configcohort', 'block_customhtml');
 
         if (!empty($CFG->block_customhtml_allowcssclasses)) {
             $mform->addElement('text', 'config_classes', get_string('configclasses', 'block_customhtml'));
@@ -77,6 +92,9 @@ class block_customhtml_edit_form extends block_edit_form {
         // have to delete text here, otherwise parent::set_data will empty content
         // of editor
         unset($this->block->config->text);
+        if (isset($this->block->config->cohortid)) {
+            $defaults->config_cohortid = $this->block->config->cohortid;
+        }
         parent::set_data($defaults);
         // restore $text
         if (!isset($this->block->config)) {
