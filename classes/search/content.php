@@ -18,7 +18,7 @@
  * Search area for block_customhtml blocks
  *
  * @package block_customhtml
- * @copyright 2017 The Open University
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
  * Search area for block_customhtml blocks
  *
  * @package block_customhtml
- * @copyright 2017 The Open University
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class content extends \core_search\base_block {

@@ -18,7 +18,7 @@
  * Unit test for search indexing.
  *
  * @package block_customhtml
- * @copyright 2017 The Open University
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
  * Unit test for search indexing.
  *
  * @package block_customhtml
- * @copyright 2017 The Open University
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class search_content_test extends \advanced_testcase {

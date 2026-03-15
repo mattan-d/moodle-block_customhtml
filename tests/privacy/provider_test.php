@@ -19,7 +19,7 @@
  *
  * @package    block_customhtml
  * @category   test
- * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace block_customhtml\privacy;
@@ -34,7 +34,7 @@ use block_customhtml\privacy\provider;
 /**
  * Unit tests for the block_customhtml implementation of the privacy API.
  *
- * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class provider_test extends \core_privacy\tests\provider_testcase {

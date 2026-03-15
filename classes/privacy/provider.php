@@ -18,7 +18,7 @@
  * Privacy Subsystem implementation for block_customhtml.
  *
  * @package    block_customhtml
- * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -37,7 +37,7 @@ use \core_privacy\local\metadata\collection;
 /**
  * Privacy Subsystem implementation for block_customhtml.
  *
- * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements

@@ -20,8 +20,7 @@ namespace block_customhtml;
  * Unit test for block_customhtml class.
  *
  * @package   block_customhtml
- * @copyright 2022 Open LMS (https://www.openlms.net/)
- * @author    Petr Skoda
+ * @copyright  CentricApp LTD dev@centricapp.co.il
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  * @coversDefaultClass \block_customhtml
